@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Food & Macronutrient Tracker</title> 
+	<style> 
+		h1 { 
+			background-color: rgb(138,249,149);
+				font-family: Raleway, sans-serif;
+				text-align: center;
+		}
+
+		label {
+				font-family: Raleway, sans-serif;
+		}
+
+		input[type="text"],
+		input[type="number"] {
+			background-color: rgb(138,249,149);
+			font-family: Raleway, sans-serif;
+		}
+        button {
+            font-family: Raleway, sans-serif;
+        }
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		td, th {
+			padding: 10px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Food & Macronutrient Tracker</h1>
+
+	<form id="form">
+		<label for="food_name">Food Name:</label>
+		<input type="text" id="food_name" name="food_name"><br>
+
+		<label for="protein">Protein (in grams):</label>
+		<input type="number" id="protein" name="protein"><br>
+
+		<label for="carbs">Carbohydrates (in grams):</label>
+		<input type="number" id="carbs" name="carbs"><br>
+
+		<label for="fats">Fats (in grams):</label>
+		<input type="number" id="fats" name="fats"><br>
+
+		<button type="button" onclick="addRow()">Add to Table</button>
+	</form>
+	<!--Making the table: https://www.youtube.com/watch?v=iDA0kF5lrVk -->
+	<table id="table">
+		<tr>
+			<th>Food Name</th>
+			<th>Protein (g)</th>
+			<th>Carbohydrates (g)</th>
+			<th>Fats (g)</th>
+			<th>Calories</th>
+		</tr>
+	</table>
+
+	<script>
+		function addRow() {
+			// Helped me with formatting: https://www.youtube.com/watch?v=srIwnQzZKms
+			// Getting the users input for food name, amount of protein, carbs, and fat 
+			const foodName = document.getElementById("food_name").value;
+			const protein = parseInt(document.getElementById("protein").value);
+			const carbs = parseInt(document.getElementById("carbs").value);
+			const fats = parseInt(document.getElementById("fats").value);
+
+			// Calculating the total calories 
+			//https://www.trifectanutrition.com/blog/how-to-count-macros-and-why-you-should-do-it
+			const calories = (protein * 4) + (carbs * 4) + (fats * 9);
+
+			// Making a new row in the table 
+			const table = document.getElementById("table");
+			const row = table.insertRow(-1);
+
+			// Making the cells of the table 
+			const foodNameCell = row.insertCell(0);
+			const proteinCell = row.insertCell(1);
+			const carbsCell = row.insertCell(2);
+			const fatsCell = row.insertCell(3);
+			const caloriesCell = row.insertCell(4);
+			foodNameCell.innerHTML = foodName;
+			proteinCell.innerHTML = protein;
+			carbsCell.innerHTML = carbs;
+			fatsCell.innerHTML = fats;
+			caloriesCell.innerHTML = calories;
+		}
+	</script>
+</body>
+</html>
